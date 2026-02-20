@@ -8,6 +8,15 @@ namespace BookShop.Infrastructure
         : IdentityDbContext(options)
     {
         public DbSet<BookData> Books { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<BookData>().HasData(new BookData
+            { Id = 1, Author = "Andrew Lock", Description = "", Name = "", Pages = 172, Year = 2029, Price = 20 });
+
+
+            base.OnModelCreating(builder);
+        }
     }
 
 
