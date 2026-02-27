@@ -1,3 +1,6 @@
+using BookShop.Application;
+using BookShop.Application.Models;
+using BookShop.Infrastructure.DataModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -5,8 +8,18 @@ namespace BookShop.Web.Areas.Admin.Pages.Books
 {
     public class IndexModel : PageModel
     {
+        private readonly IBookService _bookService;
+
+        public IndexModel(IBookService bookService)
+        {
+            _bookService = bookService;
+        }
+
+        public IList<BookDTO> BookList { get; set; }
+
         public void OnGet()
         {
+            BookList = _bookService.GetAll();
         }
     }
 }
