@@ -1,10 +1,11 @@
 ﻿using BookShop.Application.Models;
 using BookShop.Infrastructure.DataModels;
 
-namespace BookShop.Application
+namespace BookShop.Application;
+
+public interface IBookService
 {
-    public interface IBookService
-    {
-        IList<BookDTO> GetAll();
-    }
+    IList<BookDTO> GetAll();
+
+    void Create(BookCreateDto bookInput);
 }

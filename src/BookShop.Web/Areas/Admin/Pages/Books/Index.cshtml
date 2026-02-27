@@ -7,10 +7,30 @@
     <h3>
         Books
     </h3>
-    
+    <hr />
    
     <a asp-area="Admin" asp-page="/Books/Create" class="btn btn-primary">
         Add a New Book
     </a>
      
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                 
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model.BookList)
+            {
+                <tr>
+                    <td>@book.Name</td>
+                     
+                    <td>@book.Price.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

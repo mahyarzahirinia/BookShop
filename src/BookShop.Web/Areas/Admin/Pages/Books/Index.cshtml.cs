@@ -18,8 +18,9 @@ namespace BookShop.Web.Areas.Admin.Pages.Books
         public IList<BookDTO> BookList { get; set; }
 
         public void OnGet()
-        {
+        { 
             BookList = _bookService.GetAll();
         }
     }
 }
+
