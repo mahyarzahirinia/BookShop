@@ -18,5 +18,10 @@ namespace BookShop.Infrastructure.DataModels
         public required string Author { get; set; }
         public int Year { get; set; }
         public int Pages { get; set; }
+
+
+        //1 mg
+        [MaxLength(1_000_000)]
+        public byte[]? CoverImage { get; set; }
     }
 }

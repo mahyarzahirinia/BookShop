@@ -19,7 +19,7 @@ public class CreateModel : PageModel
     [BindProperty]
     public CreateInputModel Input { get; set; }
 
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPost()
     {
         if(Input.Year > DateTime.Now.Year)
         {
@@ -30,15 +30,20 @@ public class CreateModel : PageModel
         {
             ModelState.AddModelError(nameof(Pages), "Please correct the errors and try again.");
         }
-        
-        _bookService.Create(new Application.Models.BookCreateDto 
-        {   
+
+        await using var Memory_Stream = new MemoryStream();
+        await Input.CoverImage.CopyToAsync(Memory_Stream);
+        Memory_Stream.Position = 0;
+
+        _bookService.Create(new Application.Models.BookCreateDto
+        {
             Author = Input.Author,
             Description = Input.Description,
             Name = Input.Name,
             Pages = Input.Pages,
             Price = Input.Price,
-            Year = Input.Year
+            Year = Input.Year,
+            CoverImage = Memory_Stream.ToArray() 
         });
 
         return RedirectToPage("./index");
@@ -59,4 +64,6 @@ public class CreateInputModel
 
     [Range(1, 5000, ErrorMessage = "Pages must be between {1} and {2}")]
     public int Pages { get; set; }
+
+    public IFormFile? CoverImage { get; set; }
 }

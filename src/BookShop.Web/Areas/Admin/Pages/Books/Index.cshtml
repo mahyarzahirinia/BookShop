@@ -20,6 +20,10 @@
                  
                 <th>Price</th>
                 <th></th>
+
+                <th>
+                    Image
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +33,13 @@
                     <td>@book.Name</td>
                      
                     <td>@book.Price.ToString("C")</td>
+
+                    <td>
+                         <a asp-page="./details" asp-route-bookid="@book.Id" class="btn btn-info">Details</a>
+                    </td>
                 </tr>
+
+
             }
         </tbody>
     </table>

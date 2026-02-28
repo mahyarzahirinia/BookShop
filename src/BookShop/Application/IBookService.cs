@@ -8,4 +8,6 @@ public interface IBookService
     IList<BookDTO> GetAll();
 
     void Create(BookCreateDto bookInput);
+
+    BookDetails GetDetails(int bookId);
 }
